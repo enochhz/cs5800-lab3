@@ -2,11 +2,13 @@ package calculator;
 
 public class User {
 
-    public void start(Calculator calculator) {
-        calculator.start();
+    public static void main(String[] args) {
+        User user = new User();
+        Calculator calculator = new Calculator();
+        user.start(calculator);
     }
 
-    public void shutdown(Calculator calculator) {
-        calculator.shutdown();
+    public void start(Calculator calculator) {
+        calculator.start();
     }
 }

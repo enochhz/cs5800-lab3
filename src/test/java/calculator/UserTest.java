@@ -5,12 +5,14 @@ import org.junit.Test;
 
 import calculator.Calculator;
 
-public class CalculatorTests {
+public class UserTest {
 
     @Test
-    public void testStartCalculator() {
+    public void testUseCalculator() {
         Calculator calculator = new Calculator();
-        calculator.start();
+        User user = new User();
+        // if user.use(calculator)
+        // assert calculator.start() is used
         fail();
     }
 
