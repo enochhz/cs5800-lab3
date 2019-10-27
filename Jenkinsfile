@@ -1,12 +1,19 @@
 pipeline {
-    agent {
-        dockerfile true
-    }
+    agent any
     stages {
-        stage('Beginning') {
+        stage('Build') {
             steps {
-                echo 'Hello World'
-                sh 'echo myVar = $myVar'
+                echo 'Build'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo 'Test'
+            }
+        }
+        stage('Publish') {
+            steps {
+                echo 'Publish'
             }
         }
     }
