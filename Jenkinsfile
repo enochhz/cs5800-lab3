@@ -16,9 +16,12 @@ pipeline {
                 sh 'java -jar target/lab3-0.0.1-SNAPSHOT.jar'
             }
         }
-        stage('Publish') {
+        stage('Push to DockerHub') {
             steps {
-                echo 'Publish'
+                sh 'docker build -t lab3_image .'
+                sh 'docker run --rm -it lab3_image:latest'
+                sh 'docker tag lab3_image enochhaozheng/lab3_image:2'
+                sh 'docker push enochhaozheng/lab3_image:3'
             }
         }
     }
