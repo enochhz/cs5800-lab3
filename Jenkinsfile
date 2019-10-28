@@ -8,6 +8,11 @@ pipeline {
             }
         }
         stage('Test') {
+            steops {
+                sh 'mvn test'
+            }
+        }
+        stage('Run') {
             steps {
                 echo 'Test'
                 sh 'java -jar target/lab3-0.0.1-SNAPSHOT.jar'
