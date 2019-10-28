@@ -8,7 +8,7 @@ pipeline {
             }
         }
         stage('Test') {
-            steops {
+            steps {
                 sh 'mvn test'
             }
         }
