@@ -1,8 +1,5 @@
 package calculator;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,14 +17,8 @@ public class CalculatingProgramTest {
 
     @Test
     public void testAddOperation() {
-        try {
-            Method addMethod = CalculatingProgram.class.getDeclaredMethod("add");
-            addMethod.setAccessible(true);
-            int result = (int) addMethod.invoke(calculatingProgram, 1, 2);
+        int result = calculatingProgram.calculate(1, 2, '+');
         assertTrue(result == 3);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Test
@@ -38,19 +29,19 @@ public class CalculatingProgramTest {
 
     @Test
     public void testMultiplyOperation() {
-        int result = calculatingProgram.multiply(7, 9);
+        int result = calculatingProgram.calculate(7, 9, '*');
         assertTrue(result == 63);
     }
 
     @Test
     public void testDivideOperation() {
-        int result = calculatingProgram.divide(15, 3);
+        int result = calculatingProgram.calculate(15, 3, '/');
         assertTrue(result == 5);
     }
 
     @Test
     public void testModulusOperation() {
-        int result = calculatingProgram.modulus(10, 3);
+        int result = calculatingProgram.calculate(10, 3, '%');
         assertTrue(result == 1);
     }
 }

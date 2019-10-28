@@ -30,22 +30,35 @@ public class Calculator {
         System.out.println("Thank you for playing :)");
     }
 
+    public void shutdown() {
+        this.powerOn = false;
+    }
+
     private void askForInput() {
         System.out.print("Please enter two numbers split with space(ex:134 443): ");
         String stringInput = scanner.nextLine();
         String[] stringArray = stringInput.split(" ");
-        if (stringArray.length == 2) {
-            for (int i = 0; i < numbers.length; i++) {
-                numbers[i] = Integer.parseInt(stringArray[i]);
-            }
+        String error = "";
+        if (stringArray.length != 2) {
+            error = "You must enter exactly two numbers!";
         } else {
-            System.out.println("You must enter exactly two numbers!");
+            for (int i = 0; i < 2; i++) {
+                try {
+                    numbers[i] = Integer.parseInt(stringArray[i]);
+                } catch(Exception e) {
+                    error = e.toString();
+                    break;
+                }
+            }
+        }
+        if (!error.equals("")) {
+            System.out.println(error);
             askForInput();
         }
     }
 
     private void askForOperation() {
-        System.out.print("Please input your operations (+, -, *, /, %): ");
+        System.out.print("Please input one operation (+, -, *, /, %): ");
         String operationInput = scanner.nextLine().trim();
         if (operationInput.equals("+") || operationInput.equals("-") || operationInput.equals("*")
             || operationInput.equals("/") || operationInput.equals("%")) {
@@ -71,9 +84,9 @@ public class Calculator {
         if (answer.equals("y")) {
             return;
         } else if (answer.equals("n")) {
-            this.powerOn = false;
+            this.shutdown();
         } else {
-            System.out.println("Invalid input...");
+            System.out.println("Invalid input!");
             askForContinuation();
         }
     }
