@@ -11,11 +11,6 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('Run') {
-            steps {
-                sh 'java -jar target/lab3-0.0.1-SNAPSHOT.jar'
-            }
-        }
         stage('Push to DockerHub') {
             steps {
                 sh 'docker build -t lab3_image .'
