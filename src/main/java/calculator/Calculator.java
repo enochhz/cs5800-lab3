@@ -22,12 +22,16 @@ public class Calculator {
     public void start() {
         System.out.println("Welcome!");
         while (powerOn) {
-            askForInput();
-            askForOperation();
-            startCalculation();
+            calculationInstruction();
             askForContinuation();
         }
         System.out.println("Thank you for playing :)");
+    }
+
+    private void calculationInstruction() {
+        askForInput();
+        askForOperation();
+        startCalculation();
     }
 
     public void shutdown() {
@@ -35,7 +39,7 @@ public class Calculator {
     }
 
     private void askForInput() {
-        System.out.print("Please enter two numbers split with space(ex:134 443): ");
+        System.out.print("Please enter two integer split with space(ex:134 443): ");
         String stringInput = scanner.nextLine();
         String[] stringArray = stringInput.split(" ");
         String error = "";
@@ -60,21 +64,20 @@ public class Calculator {
     private void askForOperation() {
         System.out.print("Please input one operation (+, -, *, /, %): ");
         String operationInput = scanner.nextLine().trim();
-        if (operationInput.equals("+") || operationInput.equals("-") || operationInput.equals("*")
-            || operationInput.equals("/") || operationInput.equals("%")) {
-                this.operation = operationInput.charAt(0);
-        } else {
-            System.out.printf("Illegal Operation: %s\n", operationInput);
-            askForOperation();
-        }
+        this.operation = operationInput.charAt(0);
     }
 
     private void startCalculation() {
         try {
             output = calculatingProgram.calculate(numbers[0], numbers[1], operation);
             System.out.printf("The output is %s.\n", this.output);
+        } catch (ArithmeticException e) {
+            System.out.println(e.toString());
+            calculationInstruction();
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
+            askForOperation();
+            startCalculation();
         }
     }
 

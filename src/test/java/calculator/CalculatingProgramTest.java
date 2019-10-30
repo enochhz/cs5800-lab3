@@ -44,4 +44,14 @@ public class CalculatingProgramTest {
         int result = calculatingProgram.calculate(10, 3, '%');
         assertTrue(result == 1);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInvalidOperation() {
+        calculatingProgram.calculate(10, 3, '0');
+    }
+
+    @Test(expected = ArithmeticException.class)
+    public void textDivideByZeroException() {
+        calculatingProgram.calculate(10, 0, '/');
+    }
 }
